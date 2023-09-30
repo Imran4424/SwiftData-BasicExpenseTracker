@@ -23,6 +23,7 @@ struct ExpenseCell: View {
 
 struct AddExpenseSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) var context
     
     @State private var name: String = ""
     @State private var date: Date = .now
@@ -47,7 +48,46 @@ struct AddExpenseSheet: View {
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button("Save") {
-                        // save codes
+                        if name.isEmpty {
+                            return
+                        }
+                        
+                        let expense = Expense(name: name, date: date, value: value)
+                        context.insert(expense)
+                        // when you need to save without auto save
+//                        try! context.save()
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct UpdateExpenseSheet: View {
+    @Environment(\.dismiss) private var dismiss
+//    @Environment(\.modelContext) var context
+    
+    @Bindable var expense: Expense
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                TextField("Expense Name", text: $expense.name)
+                DatePicker("Date", selection: $expense.date, displayedComponents: .date)
+                TextField("Value", value: $expense.value, format: .currency(code: "USD"))
+                    .keyboardType(.decimalPad)
+            }
+            .navigationTitle("Update Expense")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button("Done") {
+                        if expense.name.isEmpty {
+                            return
+                        }
+                        
+                        dismiss()
                     }
                 }
             }
@@ -56,14 +96,27 @@ struct AddExpenseSheet: View {
 }
 
 struct ContentView: View {
+    @Environment(\.modelContext) var context
+    
+    @Query(sort: \Expense.date) var expenses: [Expense]
+    
     @State private var isShowingItemSheet = false
-    var expenses: [Expense] = []
+    @State private var expenseToEdit: Expense?
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(expenses) { expense in
                     ExpenseCell(expense: expense)
+                        .onTapGesture {
+                            expenseToEdit = expense
+                        }
+                }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        context.delete(expenses[index])
+                        // auto save happening, don't worry
+                    }
                 }
             }
             .navigationTitle("Expenses")
@@ -71,6 +124,10 @@ struct ContentView: View {
             .sheet(isPresented: $isShowingItemSheet) {
                 AddExpenseSheet()
             }
+            .sheet(item: $expenseToEdit, content: { expense in
+                UpdateExpenseSheet(expense: expense)
+                
+            })
             .toolbar {
                 if !expenses.isEmpty {
                     Button("Add Expense", systemImage: "plus") {
