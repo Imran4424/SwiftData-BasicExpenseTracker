@@ -11,6 +11,7 @@
 		1D40B5572AC855990052C770 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D40B5562AC855990052C770 /* ContentView.swift */; };
 		1D40B5592AC8559B0052C770 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D40B5582AC8559B0052C770 /* Assets.xcassets */; };
 		1D40B55C2AC8559B0052C770 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D40B55B2AC8559B0052C770 /* Preview Assets.xcassets */; };
+		1D50F5A92AC85C28004245B6 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D50F5A82AC85C28004245B6 /* Expense.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		1D40B5562AC855990052C770 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1D40B5582AC8559B0052C770 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D40B55B2AC8559B0052C770 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1D50F5A82AC85C28004245B6 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				1D40B5542AC855990052C770 /* BasicExpenseTrackerApp.swift */,
 				1D40B5562AC855990052C770 /* ContentView.swift */,
+				1D50F5A82AC85C28004245B6 /* Expense.swift */,
 				1D40B5582AC8559B0052C770 /* Assets.xcassets */,
 				1D40B55A2AC8559B0052C770 /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D50F5A92AC85C28004245B6 /* Expense.swift in Sources */,
 				1D40B5572AC855990052C770 /* ContentView.swift in Sources */,
 				1D40B5552AC855990052C770 /* BasicExpenseTrackerApp.swift in Sources */,
 			);
