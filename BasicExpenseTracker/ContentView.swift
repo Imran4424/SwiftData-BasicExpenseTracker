@@ -98,7 +98,10 @@ struct UpdateExpenseSheet: View {
 struct ContentView: View {
     @Environment(\.modelContext) var context
     
+    
     @Query(sort: \Expense.date) var expenses: [Expense]
+    // with filer predicate
+//    @Query(filter: #Predicate<Expense> { $0.value > 1000 }, sort: \Expense.date) var expenses: [Expense]
     
     @State private var isShowingItemSheet = false
     @State private var expenseToEdit: Expense?
